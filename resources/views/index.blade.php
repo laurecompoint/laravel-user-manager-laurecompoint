@@ -16,7 +16,7 @@
     </head>
     <body class="col-12">
        <h2 class="mt-4">Users - Api</h2>
-
+       
        <form method="post" action="{{route('users.create')}}">
 
         <div class="input-group mb-3 col-5">

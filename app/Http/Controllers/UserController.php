@@ -40,7 +40,7 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
           $user->save();
 
-          return redirect('/users');
+          return redirect('users')->withOk("L'utilisateur " . $user->name . " a été créé.");
 
       
     }
@@ -94,7 +94,7 @@ class UserController extends Controller
 
         $validate = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string', 'min:8'],
 
         ]);

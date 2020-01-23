@@ -17,7 +17,9 @@
     <body class="col-12">
 
        <h2 class="mt-4">User Modif - Api</h2>
-
+       <p>User name : {{$user->name}}</p>
+       <p>User email : {{$user->email}}</p>
+    
     <table class="table mt-5">
     <thead class="thead-dark">
     <tr>
@@ -39,7 +41,7 @@
       <th scope="col"> <input type="text" name="name" class="form-control" placeholder="{{$user->name}}" value="{{$user->name}}"></th>
      
       <th scope="col"><input type="email" name="email" class="form-control" placeholder="{{$user->email}}" value="{{$user->email}}"></th>
-      <th scope="col"><input type="password" name="password" class="form-control" placeholder="{{$user->password}}" value="{{$user->password}}"></th>
+      <th scope="col"><input type="password" name="password" class="form-control" placeholder="Nouveau mot de passe" value=""></th>
      
        {{csrf_field()}}
       <th scope="col">
