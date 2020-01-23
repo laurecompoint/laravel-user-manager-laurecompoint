@@ -101,7 +101,7 @@ class UserController extends Controller
         
        $user->where('id', $user->id = $request->id)->update([  'name'  =>  $user->name = $request->name, 'email'  =>  $user->email = $request->email, 'password'  =>  $user->password = $request->password, ]);
 
-       return redirect('/users');
+       return render('/users');
     }
 
     /**

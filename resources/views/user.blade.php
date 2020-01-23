@@ -9,63 +9,73 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
         <!-- Styles -->
        
-    </head>
-    <body class="col-12">
+</head>
+<body class="col-12">
 
-       <h2 class="mt-4">User Modif - Api</h2>
-       <p>User name : {{$user->name}}</p>
-       <p>User email : {{$user->email}}</p>
-    
-    <table class="table mt-5">
-    <thead class="thead-dark">
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">Email</th>
-      <th scope="col">Password</th>
-      <th scope="col">Modifier</th>
-    </tr>
-   
-  </thead>
+  <h2 class="mt-4">User Modif - Api</h2>
+       
   
-  <thead class="">
+  <div class="card border-info" style="width: 18rem;">
+      <img class="card-img-top" src="../useravatar.png" alt="Card image cap">
+      <div class="card-body">
+          <p>User name : {{$user->name}}</p>
+          <p>User email : {{$user->email}}</p>
 
-    <tr>
-    <form method="post" action="{{route('users.update')}}">
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+            Modifier 
+          </button>
+          @if ($errors->any())
+              <div class="error col-12 pt-3 text-danger row">
 
-      <th scope="col"><input type="hidden" value="{{ $user->id }}" name="id" /> </th>
-      <th scope="col"> <input type="text" name="name" class="form-control" placeholder="{{$user->name}}" value="{{$user->name}}"></th>
+                      @foreach ($errors->all() as $error)
+                          <p>{{ $error }}</p>
+                      @endforeach
+                     
+              </div>
+            @endif
+         
+      </div>
+  </div>
+  
+  <div class="modal hide fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modif user</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form method="post" action="{{route('users.update')}}">
+
+            <th class="mt-5"><input type="hidden" value="{{ $user->id }}" name="id" /> </th>
+            <div class="mt-2"> <input type="text" name="name" class="form-control" placeholder="{{$user->name}}" value="{{$user->name}}"></div>
+
+            <div class="mt-2"><input type="email" name="email" class="form-control" placeholder="{{$user->email}}" value="{{$user->email}}"></div>
+            <div  class="mt-2"><input type="password" name="password" class="form-control" placeholder="Nouveau mot de passe" value=""></div>
+
+            {{csrf_field()}}
+            <th scope="col">
+            <button class="btn btn-success mt-4" type="submit">Save Change</button>
+            </th>
+            </tr>
+            </form>
+          
+
+      </div>
      
-      <th scope="col"><input type="email" name="email" class="form-control" placeholder="{{$user->email}}" value="{{$user->email}}"></th>
-      <th scope="col"><input type="password" name="password" class="form-control" placeholder="Nouveau mot de passe" value=""></th>
-     
-       {{csrf_field()}}
-      <th scope="col">
-            
-      <button class="btn btn-outline-secondary" type="submit">Modifier</button>
-           
-      </th>
-    </tr>
-    </form>
-    @if ($errors->any())
-        <div class="error col-5 m-auto pt-3 text-danger row">
+    </div>
+  </div>
+</div>
 
-                @foreach ($errors->all() as $error)
-                    <p>{{ $error }}</p>
-                @endforeach
+  
 
-        </div>
-        @endif
-
-    
-
-  </thead>
-</table>
-
-
-    </body>
+</body>
 </html>

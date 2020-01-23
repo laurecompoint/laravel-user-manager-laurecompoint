@@ -15,11 +15,11 @@
        
     </head>
     <body class="col-12">
-       <h2 class="mt-4">Users - Api</h2>
+       <h2 class="mt-5 ml-5 text-primary">Users - Api</h2>
        
        <form method="post" action="{{route('users.create')}}">
 
-        <div class="input-group mb-3 col-5">
+        <div class="input-group mb-3 ml-4 col-5">
 
         <input type="text" name="name" class="form-control" placeholder="name">
         <input type="email" name="email" class="form-control" placeholder="email">
@@ -44,42 +44,24 @@
         @endif
 
 
-    <table class="table mt-5">
-    <thead class="thead-dark">
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">Email</th>
-     
-      <th scope="col">Delete</th>
-    </tr>
-   
-  </thead>
-  
-  <thead class="">
-  @foreach($users as $user)
-    <tr>
-      <th scope="col">{{$user->id}}</th>
-     
-      <th scope="col"><a href="user/{{$user->id}}">{{$user->name}}</a></th>
-     
-      <th scope="col">{{$user->email}}</th>
-     
-    
-        <th scope="col">
-        <form action="{{ $user->id }}" method="POST">
+<div class="row">
+@foreach($users as $user)
+<div class="card ml-5 mt-4 border-info " style="width: 18rem;">
+  <img class="card-img-top" src="useravatar.png" alt="Card image cap">
+  <div class="card-body">
+    <a href="user/{{$user->id}}"><h5 class="card-title">Name : {{$user->name}}</h5></a>
+    <p class="card-text">Email : {{$user->email}}</p>
+
+             <form action="{{ $user->id }}" method="POST">
                 {{ csrf_field() }}
 
                 <button class="btn btn-outline-danger" type="submit">Supprimer</button>
 
             </form>
-        </th>
+  </div>
+</div>
 
-    </tr>
-    @endforeach
-  </thead>
-</table>
-
-
+@endforeach
+</div>
     </body>
 </html>
