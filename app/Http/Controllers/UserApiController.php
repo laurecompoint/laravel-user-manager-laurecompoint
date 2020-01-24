@@ -25,7 +25,7 @@ class UserApiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(User $user, Request $request)
     {
        $validate = $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -38,8 +38,8 @@ class UserApiController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-            
-        return $user->save();
+        $user->save();
+        return $user;
          
     }
 
@@ -66,9 +66,14 @@ class UserApiController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        return $user->where('id', $user->id = $request->id)
-        ->update([  'name'  =>  $user->name = $request->name, 'email'  =>  $user->email = $request->email, 'password'  =>  $user->password = $request->password, ]);
+        $validate = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8'],
 
+        ]);
+      $user->where('id', $user->id)->update([  'name'  =>  $user->name = 'aude', 'email'  =>  $user->email = 'c@gmail.com', 'password'  =>  $user->password = Hash::make('password'), ]);
+      return $user;
 
    
     }
@@ -79,10 +84,11 @@ class UserApiController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user, Request $request)
+    public function destroy(User $user)
     {
        
-        $user = User::find($user->id = $request->id);
-        return $user->delete();
+        $user = User::find($user->id);
+        $user->delete();
+        return $user;
     }
 }
