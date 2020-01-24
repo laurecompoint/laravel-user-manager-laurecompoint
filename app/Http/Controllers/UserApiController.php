@@ -39,6 +39,8 @@ class UserApiController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
          return   $user->save();
+         
+         
     }
 
     /**

@@ -1,47 +1,41 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src='https://kit.fontawesome.com/a076d05399.js'></script>
-        <!-- Styles -->
-       
-    </head>
+@extends('layouts.app')
+@section('content')
     <body class="col-12">
-       <h2 class="mt-5 ml-5 text-primary">Users - Api</h2>
+       <h2 class="mt-5 ml-5 text-primary text-center">Users - Api</h2>
+
+
+       <div class="m-auto">
        
-       <form method="post" action="{{route('users.create')}}">
+       <form class=" d-flex justify-content-center" method="post " action="{{route('users.create')}}">
 
-        <div class="input-group mb-3 ml-4 col-5">
+        <div class="input-group mb-3 text-center ml-5 col-5 " >
 
-        <input type="text" name="name" class="form-control" placeholder="name">
-        <input type="email" name="email" class="form-control" placeholder="email">
+        <input type="text" name="name" value="{{old('name')}}" class="form-control" placeholder="name">
+        <input type="email" name="email"  value="{{old('email')}}" class="form-control" placeholder="email">
         <input type="password" name="password" class="form-control" placeholder="password">
 
         {{csrf_field()}}
         <div class="input-group-append">
-            <button class="btn btn-outline-primary" type="submit">Valider</button>
+            <button class="btn btn-primary" type="submit">Valider</button>
         </div>
 
         </div>
+        
         </form>
-
+        </div>
         @if ($errors->any())
-        <div class="error col-5 m-auto pt-3 text-danger row">
-
-                @foreach ($errors->all() as $error)
+        <div class="ml-4 col-5">
+        @foreach ($errors->all() as $error)
+        <div class="alert alert-danger" role="alert">
+                   
+               
                     <p>{{ $error }}</p>
-                @endforeach
-
+              
+        </div>
+        @endforeach
         </div>
         @endif
+      
 
 
 <div class="row">
@@ -63,5 +57,10 @@
 
 @endforeach
 </div>
+
+<div class="ml-4 mt-5">
+{{ $users->links() }}
+</div>
+
     </body>
-</html>
+    @endsection
