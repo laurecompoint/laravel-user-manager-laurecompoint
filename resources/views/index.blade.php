@@ -6,7 +6,7 @@
 
        <div class="m-auto">
        
-       <form class=" d-flex justify-content-center" method="post " action="{{route('users.create')}}">
+       <form class=" d-flex justify-content-center" method="post" action="{{route('users.store')}}">
 
         <div class="input-group mb-3 text-center ml-5 col-5 " >
 
@@ -43,7 +43,7 @@
 <div class="card ml-5 mt-4 border-info " style="width: 18rem;">
   <img class="card-img-top" src="useravatar.png" alt="Card image cap">
   <div class="card-body">
-    <a href="users/{{$user->id}}"><h5 class="card-title">Name : {{$user->name}}</h5></a>
+    <a href="user/{{$user->id}}"><h5 class="card-title">Name : {{$user->name}}</h5></a>
     <p class="card-text">Email : {{$user->email}}</p>
 
              <form action="{{ $user->id }}" method="POST">

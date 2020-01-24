@@ -26,7 +26,19 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(User $user, Request $request)
+    {
+      
+      
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
         $validate = $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -40,20 +52,8 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
           $user->save();
 
-          return redirect('users')->withOk("L'utilisateur " . $user->name . " a été créé.");
+          return redirect('users');
 
-      
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
@@ -101,7 +101,7 @@ class UserController extends Controller
         
        $user->where('id', $user->id = $request->id)->update([  'name'  =>  $user->name = $request->name, 'email'  =>  $user->email = $request->email, 'password'  =>  $user->password = $request->password, ]);
 
-       return render('/users');
+       return redirect('/users');
     }
 
     /**

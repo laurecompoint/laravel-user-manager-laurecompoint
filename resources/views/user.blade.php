@@ -47,10 +47,10 @@
 
             <img class="card-img-top" src="../udapteuser.png" alt="Card image cap">
 
-            <th class="mt-5"><input type="hidden" value="{{ $user->id }}" name="id" /> </th>
-            <div class="mt-2"> <input type="text" name="name" class="form-control" placeholder="{{$user->name}}" value="{{$user->name}}"></div>
+            <th class="mt-5"><input type="hidden"  value="{{ $user->id }}" name="id" /> </th>
+            <div class="mt-2"> <input type="text" value="{{old('name')}}" name="name" class="form-control" placeholder="{{$user->name}}" ></div>
 
-            <div class="mt-2"><input type="email" name="email" class="form-control" placeholder="{{$user->email}}" value="{{$user->email}}"></div>
+            <div class="mt-2"><input type="email" name="email" class="form-control" placeholder="{{$user->email}}" value="{{old('email')}}" ></div>
             <div  class="mt-2"><input type="password" name="password" class="form-control" placeholder="Nouveau mot de passe" value=""></div>
 
             {{csrf_field()}}

@@ -16,9 +16,7 @@ Route::get('/', function () {
 });
 
 
-//Route::get('/users', 'UserController@index');
 Route::resource('users', 'UserController');
 
-Route::post('/users-add', 'UserController@create')->name('users.create');
 Route::post('/users-update', 'UserController@update')->name('users.update');
 Route::post('{id}', 'UserController@destroy')->name('{id}');

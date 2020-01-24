@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 class UserApiController extends Controller
 {
     /**
@@ -27,19 +28,25 @@ class UserApiController extends Controller
      */
     public function store(User $user, Request $request)
     {
-       $validate = $request->validate([
+       
+        $validator = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
 
         ]);
-
+       
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();
+       
         return $user;
+
+      
+    
+            
          
     }
 
