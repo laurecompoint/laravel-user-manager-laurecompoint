@@ -25,7 +25,7 @@ class UserApiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function store(Request $request)
     {
        $validate = $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -38,8 +38,8 @@ class UserApiController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-         return   $user->save();
-         
+            
+        return $user->save();
          
     }
 

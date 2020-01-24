@@ -16,9 +16,5 @@ use Illuminate\Http\Request;
 
 
 Route::apiResource('/users', 'UserApiController');
-Route::apiResource('/user', 'UserApiController');
 
-Route::middleware('api')->post('/users-add', 'UserApiController@create');
-Route::middleware('api')->post('/users-delete/{id}', 'UserApiController@destroy');
-Route::middleware('api')->post('/users-update/{id}', 'UserApiController@update');
 
