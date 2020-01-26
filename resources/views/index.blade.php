@@ -20,11 +20,13 @@
         </div>
 
         </div>
-        
+       
+      
         </form>
+       
         </div>
         @if ($errors->any())
-        <div class="ml-4 col-5">
+        <div class="ml-4 col-11">
         @foreach ($errors->all() as $error)
         <div class="alert alert-danger" role="alert">
                    
@@ -35,11 +37,25 @@
         @endforeach
         </div>
         @endif
+
+        @if (session('alertdelete'))
+        <div class="alert alert-success col-10 m-auto">
+            {{ session('alertdelete') }}
+        </div>
+        @endif
+
+        @if (session('alertcreate'))
+        <div class="alert alert-success col-10 m-auto">
+            {{ session('alertcreate') }}
+        </div>
+        @endif
+
       
 
 
 <div class="row">
 @foreach($users as $user)
+
 <div class="card ml-5 mt-4 border-info " style="width: 18rem;">
   <img class="card-img-top" src="useravatar.png" alt="Card image cap">
   <div class="card-body">
@@ -57,6 +73,8 @@
 
 @endforeach
 </div>
+
+
 
 <div class="ml-4 mt-5">
 {{ $users->links() }}

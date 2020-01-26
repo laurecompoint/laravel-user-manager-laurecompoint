@@ -30,9 +30,22 @@
               
   </div>
   @endforeach
-  </div>
   @endif
+  @if (session('alertupdate'))
+        <div class="alert alert-success ml-5 h-100">
+            {{ session('alertupdate') }}
+        </div>
+  @endif
+
   </div>
+
+
+  
+  </div>
+  <div class="d-flex justify-content-end" style="margin-top: 250px">
+  <a href="{{ URL::previous() }}" class="btn btn-info " role="button" aria-disabled="true">Back</a>
+  </div>
+  
   <div class="modal hide fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -48,9 +61,9 @@
             <img class="card-img-top" src="../udapteuser.png" alt="Card image cap">
 
             <th class="mt-5"><input type="hidden"  value="{{ $user->id }}" name="id" /> </th>
-            <div class="mt-2"> <input type="text" value="{{old('name')}}" name="name" class="form-control" placeholder="{{$user->name}}" ></div>
+            <div class="mt-2"> <input type="text" value="{{$user->name}}" name="name" class="form-control" placeholder="{{$user->name}}" ></div>
 
-            <div class="mt-2"><input type="email" name="email" class="form-control" placeholder="{{$user->email}}" value="{{old('email')}}" ></div>
+            <div class="mt-2"><input type="email" name="email" class="form-control" placeholder="{{$user->email}}" value="{{$user->email}}" ></div>
             <div  class="mt-2"><input type="password" name="password" class="form-control" placeholder="Nouveau mot de passe" value=""></div>
 
             {{csrf_field()}}

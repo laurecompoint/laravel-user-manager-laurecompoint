@@ -52,8 +52,8 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
           $user->save();
 
-          return redirect('users');
-
+          //return redirect('users');
+          return redirect()->back()->with('alertcreate', 'User à bien été ajouter...' );
     }
 
     /**
@@ -101,7 +101,8 @@ class UserController extends Controller
         
        $user->where('id', $user->id = $request->id)->update([  'name'  =>  $user->name = $request->name, 'email'  =>  $user->email = $request->email, 'password'  =>  $user->password = $request->password, ]);
 
-       return redirect('/users');
+       //return redirect('/users');
+       return redirect()->back()->with('alertupdate', 'User à bien été mis à jour...' );
     }
 
     /**
@@ -114,6 +115,7 @@ class UserController extends Controller
     {
         $user = User::find($user->id = $request->id);
         $user->delete();
-        return redirect('/users');
+        //return redirect('/users');
+        return redirect()->back()->with('alertdelete', 'User à bien été suprimé...' );
     }
 }

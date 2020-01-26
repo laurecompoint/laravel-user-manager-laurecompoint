@@ -74,7 +74,7 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'User-Api') }}
+                    User-api
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -86,7 +86,7 @@
                     <!-- Right Side Of Navbar -->
                     <div class="top-right links">
                    
-                        <a href="http://localhost:8000/">Home</a>
+                       
                         <a href="users">Users - Interface</a>
                         <a href="api/users">Users - Api</a>
                   
