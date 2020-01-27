@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\MessageBag;
 class UserApiController extends Controller
 {
     /**
@@ -29,25 +30,28 @@ class UserApiController extends Controller
     public function store(User $user, Request $request)
     {
        
-        $validator = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8'],
-
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|unique:users',
+            'name' => 'required|string|max:50',
+            'password' => 'required'
         ]);
-       
-        $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->save();
-       
-        return $user;
-
-      
-    
-            
          
+        if ($validator->fails()) {
+           
+            $errors = $validator->errors();
+
+            return $errors->toJson();
+        }
+        else{
+            $user = new User;
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->save();
+            return $user;
+        }
+    
+       
     }
 
     /**
@@ -73,14 +77,25 @@ class UserApiController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $validate = $request->validate([
+    
+        $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string', 'min:8'],
-
         ]);
-      $user->where('id', $user->id)->update([  'name'  =>  $user->name = 'aude', 'email'  =>  $user->email = 'c@gmail.com', 'password'  =>  $user->password = Hash::make('password'), ]);
-      return $user;
+        if ($validator->fails()) {
+           
+            $errors = $validator->errors();
+
+            return $errors->toJson();
+        }
+        else{
+            $user->update($request->all());
+        
+           return $user;
+
+        }
+
 
    
     }

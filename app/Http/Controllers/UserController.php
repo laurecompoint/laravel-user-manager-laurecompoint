@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
 {
     /**
@@ -40,20 +41,26 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $validate = $request->validate([
+    
+        $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
-
         ]);
-        $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-          $user->save();
-
-          //return redirect('users');
-          return redirect()->back()->with('alertcreate', 'User à bien été ajouter...' );
+        if (!$validator->fails()) {
+            $user = new User;
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+              $user->save();
+    
+              //return redirect('users');
+              return redirect()->back()->with('alertcreate', 'User à bien été ajouter...' );
+        }
+        else{
+            return 'erreur';
+        }
+       
     }
 
     /**
@@ -92,17 +99,25 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
 
-        $validate = $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string', 'min:8'],
-
         ]);
-        
-       $user->where('id', $user->id = $request->id)->update([  'name'  =>  $user->name = $request->name, 'email'  =>  $user->email = $request->email, 'password'  =>  $user->password = $request->password, ]);
+        if (!$validator->fails()) {
 
-       //return redirect('/users');
-       return redirect()->back()->with('alertupdate', 'User à bien été mis à jour...' );
+            $user->where('id', $user->id = $request->id)->update([  'name'  =>  $user->name = $request->name, 'email'  =>  $user->email = $request->email, 'password'  =>  $user->password = $request->password, ]);
+
+       
+            return redirect()->back()->with('alertupdate', 'User à bien été mis à jour...' );
+
+        }
+        else{
+          return 'erreur';
+        }
+      
+        
+    
     }
 
     /**
