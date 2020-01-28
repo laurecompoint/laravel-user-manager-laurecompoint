@@ -56,8 +56,8 @@
         </button>
       </div>
       <div class="modal-body">
-      <form method="post" action="{{route('users.update')}}">
-
+      <form method="post" action="{{route('users.update', $user->id )}}">
+      @method('PUT')
             <img class="card-img-top" src="../udapteuser.png" alt="Card image cap">
 
             <th class="mt-5"><input type="hidden"  value="{{ $user->id }}" name="id" /> </th>

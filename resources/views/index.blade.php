@@ -62,9 +62,9 @@
     <a href="users/{{$user->id}}"><h5 class="card-title">Name : {{$user->name}}</h5></a>
     <p class="card-text">Email : {{$user->email}}</p>
 
-             <form action="{{ $user->id }}" method="POST">
+             <form method="post" action="{{route('users.destroy', $user->id )}}">
+             @method('DELETE')
                 {{ csrf_field() }}
-
                 <button class="btn btn-outline-danger" type="submit">Supprimer</button>
 
             </form>
