@@ -55,7 +55,7 @@ class UserController extends Controller
               $user->save();
     
               //return redirect('users');
-              return redirect()->back()->with('alertcreate', 'User à bien été ajouter...' );
+              return redirect()->back()->with('alertcreate', "User name :   $user->name  à bien été crée" );
         }
         else{
             return 'erreur';
@@ -109,7 +109,7 @@ class UserController extends Controller
             $user->where('id', $user->id = $request->id)->update([  'name'  =>  $user->name = $request->name, 'email'  =>  $user->email = $request->email, 'password'  =>  $user->password = $request->password, ]);
 
        
-            return redirect()->back()->with('alertupdate', 'User à bien été mis à jour...' );
+            return redirect()->back()->with('alertupdate', "User name :   $user->name  à bien été mis à jour" );
 
         }
         else{
@@ -127,10 +127,10 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user, Request $request)
-    {
+    {   
         $user = User::find($user->id);
         $user->delete();
       
-        return redirect()->back()->with('alertdelete', 'User à bien été suprimé...' );
+        return redirect()->back()->with('alertdelete', "User name :   $user->name  à bien été suprimer");
     }
 }

@@ -41,6 +41,7 @@
         @if (session('alertdelete'))
         <div class="alert alert-success col-10 m-auto">
             {{ session('alertdelete') }}
+           
         </div>
         @endif
 

@@ -87,8 +87,8 @@
                     <div class="top-right links">
                    
                        
-                        <a href="users">Users - Interface</a>
-                        <a href="api/users">Users - Api</a>
+                        <a href="/users">Users - Interface</a>
+                        <a href="/api/users">Users - Api</a>
                   
                        
                   
