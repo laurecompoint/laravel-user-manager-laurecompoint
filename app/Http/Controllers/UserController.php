@@ -41,13 +41,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-    
-        $validator = Validator::make($request->all(), [
+        $validate = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
         ]);
-        if (!$validator->fails()) {
+        
             $user = new User;
             $user->name = $request->name;
             $user->email = $request->email;
@@ -56,10 +55,8 @@ class UserController extends Controller
     
               //return redirect('users');
               return redirect()->back()->with('alertcreate', "User name :   $user->name  à bien été crée" );
-        }
-        else{
-            return 'erreur';
-        }
+        
+        
        
     }
 
@@ -99,22 +96,19 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
 
-        $validator = Validator::make($request->all(), [
+        $validate = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string', 'min:8'],
         ]);
-        if (!$validator->fails()) {
+      
 
             $user->where('id', $user->id = $request->id)->update([  'name'  =>  $user->name = $request->name, 'email'  =>  $user->email = $request->email, 'password'  =>  $user->password = $request->password, ]);
 
        
             return redirect()->back()->with('alertupdate', "User name :   $user->name  à bien été mis à jour" );
 
-        }
-        else{
-          return 'erreur';
-        }
+      
       
         
     
